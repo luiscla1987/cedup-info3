@@ -22,14 +22,14 @@ Funcionalidades principais:
 
 | ID | Módulo/Responsabilidade | Descrição resumida  | Aluno |
 | ------------- | ------------- |------------- | ------------- |
-| 1	| Modelagem do Banco de Dados |	Criação do modelo relacional, tabelas e integração inicial com PHP | NOME  |
-| 2	| Cadastro e Autenticação de Usuários |	Formulários, validação, login, logout e permissões  | NOME  |
-| 3	| Cadastro de Eventos |	CRUD de eventos, validação e associação com usuários | NOME  |
-| 4	| Inscrição em Eventos | Interface para inscrição, confirmação e cancelamento  | NOME  |
-| 5	| Listagem e Busca de Eventos |	Exibição de eventos, filtros e pesquisa  |  NOME  |
-| 6	| Controle de Presença | Registro de presença, exportação de listas  |  NOME  |
-| 7	| Relatórios e Estatísticas | Geração de relatórios em PDF/Excel, gráficos simples |  NOME  |
-| 8	| Administração do Sistema | Gerenciamento de permissões, configurações e auditoria  |  NOME  |
+| 1	| Modelagem do Banco de Dados |	Criação do modelo relacional, tabelas e integração inicial com PHP | **RICARDO**  |
+| 2	| Cadastro e Autenticação de Usuários |	Formulários, validação, login, logout e permissões  | **THOMAZ**  |
+| 3	| Cadastro de Eventos |	CRUD de eventos, validação e associação com usuários | **EDUARDO**  |
+| 4	| Inscrição em Eventos | Interface para inscrição, confirmação e cancelamento  | **CASSIANO**  |
+| 5	| Listagem e Busca de Eventos |	Exibição de eventos, filtros e pesquisa  |  **JOÃO**  |
+| 6	| Controle de Presença | Registro de presença, exportação de listas  |  **LEANDRO**  |
+| 7	| Relatórios e Estatísticas | Geração de relatórios em PDF/Excel, gráficos simples |  **DANIEL**  |
+| 8	| Administração do Sistema | Gerenciamento de permissões, configurações e auditoria  |  **ANDRÉ**  |
 
 ## 3. Integração e Dependência ##
 

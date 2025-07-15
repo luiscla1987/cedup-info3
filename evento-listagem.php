@@ -11,8 +11,6 @@
         padding: 0px;
         box-sizing: border-box;
     }
-
-
 </style>
 <body>
     

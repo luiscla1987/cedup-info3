@@ -39,10 +39,10 @@ CREATE TABLE inscritos (
 CREATE TABLE inscritos_eventos (
     id_inscricao INT AUTO_INCREMENT PRIMARY KEY,
     id_evento INT NOT NULL,
-    id_inscrito INT NOT NULL,
+    id_inscritos INT NOT NULL,
     status INT DEFAULT 1,
     FOREIGN KEY (id_evento) REFERENCES eventos(id_evento) ON DELETE CASCADE,
-    FOREIGN KEY (id_inscrito) REFERENCES inscritos(id_inscrito) ON DELETE CASCADE
+    FOREIGN KEY (id_inscritos) REFERENCES inscritos(id_inscritos) ON DELETE CASCADE
 );
 
 

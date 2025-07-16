@@ -1,3 +1,3 @@
 <?php
-    echo"quem ta lendo é gay kkkkkkkkk"
+    header('location: front/login.php');
 ?>

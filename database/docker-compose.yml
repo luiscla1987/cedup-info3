@@ -39,7 +39,9 @@ services:
 
   # Serviço PHP
   php:
-    image: php:8.2-apache
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: php_app
     restart: always
     volumes:

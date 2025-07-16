@@ -50,3 +50,4 @@ CREATE TABLE inscritos_eventos (
 CREATE USER IF NOT EXISTS 'app_user'@'%' IDENTIFIED BY 'app_password';
 GRANT SELECT, INSERT, UPDATE, DELETE ON exemplo_app.* TO 'app_user'@'%';
 FLUSH PRIVILEGES;
+

@@ -51,3 +51,6 @@ CREATE USER IF NOT EXISTS 'app_user'@'%' IDENTIFIED BY 'app_password';
 GRANT SELECT, INSERT, UPDATE, DELETE ON exemplo_app.* TO 'app_user'@'%';
 FLUSH PRIVILEGES;
 
+-- inserçaõ do root
+INSERT INTO `usuarios` (`id_usuario`, `nivel_usuarios`, `nome_usuarios`, `email_usuarios`, `senha_usuarios`, `cpf_usuarios`) VALUES
+(1, 2, 'root', 'root@gmail.com', '1234', '12345678901');

@@ -1,24 +1,21 @@
 <?php 
-    include('../back/conecta.php');
-    
-    $insercao_teste = "INSERT INTO usuarios (
-        id_usuario,
-        nivel_usuarios,
-        nome_usuarios,
-        email_usuarios,
-        senha_usuarios,
-        cpf_usuarios
-        ) VALUES (
-        1,
-        'admin',
-        'João Vitor',
-        'joao@example.com',
-        'senha123',
-        '123.456.789-00'
-        )";
-    
-    mysqli_query($conecta, $insercao_teste) or die ("Não foi possivel realizar o cadastro, tente novamente mais tarde");
+  include('../back/conecta.php');
 
+  $insercao_teste = "INSERT INTO usuarios (
+    nivel_usuarios,
+    nome_usuarios,
+    email_usuarios,
+    senha_usuarios,
+    cpf_usuarios
+  ) VALUES (
+    1,
+    'João Vitor',
+    'joao.vitor@example.com',
+    'senha123', 
+    '12345678901'
+  );"; // <- ponto e vírgula adicionado aqui
+
+  mysqli_query($conecta, $insercao_teste) or die ("Não foi possível realizar o cadastro, tente novamente mais tarde");
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">

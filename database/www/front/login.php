@@ -1,5 +1,5 @@
 <?php 
-    include('conecta.php');
+    include('../back/conecta.php');
     
     $insercao_teste = "INSERT INTO usuarios (
         id_usuario,

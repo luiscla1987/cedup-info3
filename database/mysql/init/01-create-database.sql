@@ -1,43 +1,50 @@
 -- Script de inicialização do banco de dados
 -- Este arquivo será executado automaticamente quando o container MySQL for criado
 
--- Criar banco de dados de exemplo
-CREATE DATABASE IF NOT EXISTS exemplo_app;
+CREATE DATABASE IF NOT EXISTS evento_db;
+USE evento_db;
 
--- Usar o banco de dados
-USE exemplo_app;
-
--- Criar tabela de usuários de exemplo
-CREATE TABLE IF NOT EXISTS usuarios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    senha VARCHAR(255) NOT NULL,
-    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    ativo BOOLEAN DEFAULT TRUE
+-- Tabela eventos
+CREATE TABLE eventos (
+    id_eventos INT AUTO_INCREMENT PRIMARY KEY,
+    nome_eventos VARCHAR(255) NOT NULL,
+    data_eventos DATE NOT NULL,
+    hora_eventos TIME NOT NULL,
+    capacidade INT NOT NULL,
+    valor DECIMAL(10,2) NOT NULL,
+    local_eventos VARCHAR(255) NOT NULL
 );
 
--- Inserir dados de exemplo
-INSERT INTO usuarios (nome, email, senha) VALUES
-('João Silva', 'joao@exemplo.com', MD5('123456')),
-('Maria Santos', 'maria@exemplo.com', MD5('123456')),
-('Pedro Oliveira', 'pedro@exemplo.com', MD5('123456'));
-
--- Criar tabela de produtos de exemplo
-CREATE TABLE IF NOT EXISTS produtos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    descricao TEXT,
-    preco DECIMAL(10,2) NOT NULL,
-    estoque INT DEFAULT 0,
-    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- Tabela usuarios
+CREATE TABLE usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nivel_usuarios INT NOT NULL,
+    nome_usuarios VARCHAR(255) NOT NULL,
+    email_usuarios VARCHAR(255) NOT NULL UNIQUE,
+    senha_usuarios VARCHAR(255) NOT NULL,
+    cpf_usuarios CHAR(11) NOT NULL UNIQUE
 );
 
--- Inserir produtos de exemplo
-INSERT INTO produtos (nome, descricao, preco, estoque) VALUES
-('Notebook Dell', 'Notebook Dell Inspiron 15', 2500.00, 10),
-('Mouse Logitech', 'Mouse sem fio Logitech MX Master', 350.00, 25),
-('Teclado Mecânico', 'Teclado mecânico RGB', 450.00, 15);
+-- Tabela inscritos
+CREATE TABLE inscritos (
+    id_inscritos INT AUTO_INCREMENT PRIMARY KEY,
+    nome_inscritos VARCHAR(255) NOT NULL,
+    telefone_inscritos VARCHAR(20),
+    cpf_inscritos CHAR(11) NOT NULL UNIQUE,
+    email_inscritos VARCHAR(255) NOT NULL,
+    status INT DEFAULT 1
+);
+
+-- Tabela inscritos_eventos
+CREATE TABLE inscritos_eventos (
+    id_inscricao INT AUTO_INCREMENT PRIMARY KEY,
+    id_evento INT NOT NULL,
+    id_inscrito INT NOT NULL,
+    status INT DEFAULT 1,
+    FOREIGN KEY (id_evento) REFERENCES eventos(id_evento) ON DELETE CASCADE,
+    FOREIGN KEY (id_inscrito) REFERENCES inscritos(id_inscrito) ON DELETE CASCADE
+);
+
 
 -- Criar usuário específico para a aplicação
 CREATE USER IF NOT EXISTS 'app_user'@'%' IDENTIFIED BY 'app_password';

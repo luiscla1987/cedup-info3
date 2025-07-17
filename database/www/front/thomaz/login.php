@@ -29,15 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $usuario = $resultado->fetch_assoc();
                 
                 // Verifica se a senha fornecida corresponde à senha hash no banco de dados
-                if (password_verify($senha, $usuario['senha'])) {
+                if ($senha === $usuario['senha_usuarios']) {
                     $_SESSION['id_usuario'] = $usuario['id_usuario'];
-                    $_SESSION['nome_usuario'] = $usuario['nome'];
-                    $_SESSION['nivel_usuario'] = $usuario['nivel_usuario'];
+                    $_SESSION['nome_usuario'] = $usuario['nome_usuarios'];
+                    $_SESSION['nivel_usuario'] = $usuario['nivel_usuarios'];
                     $_SESSION['logado'] = true;
-                    
-                    // Redireciona para a página principal após o login bem-sucedido
+
                     header('Location: ../index.php');
-                    exit(); // Importante: Terminar a execução após o redirecionamento
+                    exit();
                 } else {
                     $erro = 'Email ou senha incorretos. (Senha não corresponde)';
                 }

@@ -13,9 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $erro = 'Por favor, preencha todos os campos.';
     } else {
         // Prepara a consulta para buscar o usuário pelo email
-        $stmt = $conexao->prepare("SELECT id_usuario, nome, nivel_usuario, senha FROM usuarios WHERE email = ?");
+        $stmt = $conecta->prepare("SELECT id_usuario, nome_usuarios, nivel_usuarios, senha_usuarios FROM usuarios WHERE email_usuarios = ?");
         if ($stmt === false) {
-            $erro = 'Erro ao preparar consulta: ' . $conexao->error;
+            $erro = 'Erro ao preparar consulta: ' . $conecta->error;
         } else {
             $stmt->bind_param("s", $email);
             $stmt->execute();
@@ -25,15 +25,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $usuario = $resultado->fetch_assoc();
                 
                 // Verifica se a senha fornecida corresponde à senha hash no banco de dados
-                if (password_verify($senha, $usuario['senha'])) {
+                if ($senha === $usuario['senha_usuarios']) {
                     $_SESSION['id_usuario'] = $usuario['id_usuario'];
-                    $_SESSION['nome_usuario'] = $usuario['nome'];
-                    $_SESSION['nivel_usuario'] = $usuario['nivel_usuario'];
+                    $_SESSION['nome_usuario'] = $usuario['nome_usuarios'];
+                    $_SESSION['nivel_usuario'] = $usuario['nivel_usuarios'];
                     $_SESSION['logado'] = true;
-                    
-                    // Redireciona para a página principal após o login bem-sucedido
-                    header('Location: ../index.php');
-                    exit(); // Importante: Terminar a execução após o redirecionamento
+
+                    header('Location: ../../index.php');
+                    exit();
                 } else {
                     $erro = 'Email ou senha incorretos. (Senha não corresponde)';
                 }

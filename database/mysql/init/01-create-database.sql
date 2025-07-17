@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     cpf_usuarios CHAR(11) NOT NULL UNIQUE
 );
 
+
 -- Inserção segura do usuário root (sem erro se já existir)
 INSERT INTO usuarios (id_usuario, nivel_usuarios, nome_usuarios, email_usuarios, senha_usuarios, cpf_usuarios)
 VALUES (1, 2, 'root', 'root@gmail.com', '1234', '12345678901')
@@ -31,6 +32,14 @@ ON DUPLICATE KEY UPDATE
     email_usuarios = VALUES(email_usuarios),
     senha_usuarios = VALUES(senha_usuarios),
     cpf_usuarios = VALUES(cpf_usuarios);
+=======
+-- inserção do root
+INSERT INTO `usuarios` (`id_usuario`, `nivel_usuarios`, `nome_usuarios`, `email_usuarios`, `senha_usuarios`, `cpf_usuarios`) VALUES
+(1, 1, 'admin', 'admin@gmail.com', 'admin', '12345678901');
+
+CREATE TABLE ricardao (
+    id_ricardao INT AUTO_INCREMENT PRIMARY KEY,
+);
 
 -- Tabela inscritos
 CREATE TABLE IF NOT EXISTS inscritos (

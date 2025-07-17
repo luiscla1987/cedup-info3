@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once('../../../back/conecta.php');
+require_once('../../database/www/back/conecta.php');
 
 // Verificar se usuário está logado
 if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {

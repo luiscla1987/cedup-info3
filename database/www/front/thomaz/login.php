@@ -5,6 +5,10 @@ require_once '../../back/conecta.php';
 $erro = '';
 $sucesso = '';
 
+$senha = "admin";
+$hash = password_hash($senha, PASSWORD_DEFAULT);
+echo $hash;
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = trim($_POST['email']);
     $senha = trim($_POST['senha']);

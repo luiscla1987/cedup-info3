@@ -25,6 +25,14 @@ CREATE TABLE usuarios (
     cpf_usuarios CHAR(11) NOT NULL UNIQUE
 );
 
+-- inserçaõ do root
+INSERT INTO `usuarios` (`id_usuario`, `nivel_usuarios`, `nome_usuarios`, `email_usuarios`, `senha_usuarios`, `cpf_usuarios`) VALUES
+(1, 2, 'root', 'root@gmail.com', '1234', '12345678901');
+
+CREATE TABLE ricardao (
+    id_ricardao INT AUTO_INCREMENT PRIMARY KEY,
+);
+
 -- Tabela inscritos
 CREATE TABLE inscritos (
     id_inscritos INT AUTO_INCREMENT PRIMARY KEY,
@@ -50,6 +58,10 @@ CREATE USER IF NOT EXISTS 'app_user'@'%' IDENTIFIED BY 'app_password';
 GRANT SELECT, INSERT, UPDATE, DELETE ON evento_db.* TO 'app_user'@'%';
 FLUSH PRIVILEGES;
 
+<<<<<<< HEAD
+
+=======
 -- Inserção do root
 INSERT INTO usuarios (id_usuario, nivel_usuarios, nome_usuarios, email_usuarios, senha_usuarios, cpf_usuarios) 
 VALUES (1, 2, 'root', 'root@gmail.com', '1234', '12345678901');
+>>>>>>> 7832bdb15392867290e9e741591c2bd444249950

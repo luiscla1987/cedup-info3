@@ -1,3 +1,4 @@
 <?php
-    header('location: /front/thomaz/login.php');
+    include("/back/conecta.php");
+    include("/thomaz/menu.php");
 ?>

@@ -1,76 +1,84 @@
-<?php 
-  include('../back/conecta.php');
+<?php
+session_start();
+require_once '../../back/conecta.php';
 
+$erro = '';
+$sucesso = '';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = trim($_POST['email']);
+    $senha = trim($_POST['senha']);
+    
+    if (empty($email) || empty($senha)) {
+        $erro = 'Por favor, preencha todos os campos.';
+    } else {
+        // Prepara a consulta para buscar o usuário pelo email
+        $stmt = $conexao->prepare("SELECT id_usuario, nome, nivel_usuario, senha FROM usuarios WHERE email = ?");
+        if ($stmt === false) {
+            $erro = 'Erro ao preparar consulta: ' . $conexao->error;
+        } else {
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $resultado = $stmt->get_result();
+            
+            if ($resultado->num_rows == 1) {
+                $usuario = $resultado->fetch_assoc();
+                
+                // Verifica se a senha fornecida corresponde à senha hash no banco de dados
+                if (password_verify($senha, $usuario['senha'])) {
+                    $_SESSION['id_usuario'] = $usuario['id_usuario'];
+                    $_SESSION['nome_usuario'] = $usuario['nome'];
+                    $_SESSION['nivel_usuario'] = $usuario['nivel_usuario'];
+                    $_SESSION['logado'] = true;
+                    
+                    // Redireciona para a página principal após o login bem-sucedido
+                    header('Location: ../index.php');
+                    exit(); // Importante: Terminar a execução após o redirecionamento
+                } else {
+                    $erro = 'Email ou senha incorretos. (Senha não corresponde)';
+                }
+            } else {
+                $erro = 'Email ou senha incorretos. (Usuário não encontrado)';
+            }
+            $stmt->close();
+        }
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tela de Login</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      height: 100vh;
-      background: linear-gradient(to right, #667eea, #764ba2);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .login-container {
-      background: white;
-      padding: 30px 40px;
-      border-radius: 10px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      width: 300px;
-    }
-
-    .login-container h2 {
-      margin-bottom: 20px;
-      text-align: center;
-      color: #333;
-    }
-
-    .login-container input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .login-container button {
-      width: 100%;
-      padding: 10px;
-      background-color: #667eea;
-      border: none;
-      color: white;
-      font-weight: bold;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .login-container button:hover {
-      background-color: #5a67d8;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="login-container">
-    <h2>Login</h2>
-    <form action="login.php" method="POST">
-      <input type="text" name="usuario" placeholder="Usuário" required />
-      <input type="password" name="senha" placeholder="Senha" required />
-      <button type="submit">Entrar</button>
-    </form>
-  </div>
+    <div>
+        <h2>Login</h2>
+        
+        <?php if ($erro): ?>
+            <div><?php echo $erro; ?></div>
+        <?php endif; ?>
+        
+        <?php if ($sucesso): ?>
+            <div><?php echo $sucesso; ?></div>
+        <?php endif; ?>
+        
+        <form method="POST" action="">
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div>
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" required>
+            </div>
+            
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
 </body>
 </html>

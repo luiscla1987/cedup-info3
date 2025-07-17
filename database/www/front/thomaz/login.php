@@ -34,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $_SESSION['nome_usuario'] = $usuario['nome_usuarios'];
                     $_SESSION['nivel_usuario'] = $usuario['nivel_usuarios'];
                     $_SESSION['logado'] = true;
-
                     header('Location: ../index.php');
                     exit();
                 } else {

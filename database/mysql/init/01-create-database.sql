@@ -32,7 +32,7 @@ ON DUPLICATE KEY UPDATE
     email_usuarios = VALUES(email_usuarios),
     senha_usuarios = VALUES(senha_usuarios),
     cpf_usuarios = VALUES(cpf_usuarios);
-=======
+
 -- inserção do root
 INSERT INTO `usuarios` (`id_usuario`, `nivel_usuarios`, `nome_usuarios`, `email_usuarios`, `senha_usuarios`, `cpf_usuarios`) VALUES
 (1, 1, 'admin', 'admin@gmail.com', 'admin', '12345678901');

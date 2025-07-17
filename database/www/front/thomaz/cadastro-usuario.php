@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $erro = 'A senha deve ter pelo menos 6 caracteres.';
     } else {
         // Verificar se email já existe
-        $stmt_email = $conexao->prepare("SELECT id_usuario FROM usuarios WHERE email = ?");
+        $stmt_email = $conexao->prepare("SELECT id_usuario FROM usuarios WHERE email_usuarios = ?");
         $stmt_email->bind_param("s", $email);
         $stmt_email->execute();
         $resultado_email = $stmt_email->get_result();
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $erro = 'Este email já está cadastrado.';
         } else {
             // Verificar se CPF já existe
-            $stmt_cpf = $conexao->prepare("SELECT id_usuario FROM usuarios WHERE cpf = ?");
+            $stmt_cpf = $conexao->prepare("SELECT id_usuario FROM usuarios WHERE cpf_usuarios = ?");
             $stmt_cpf->bind_param("s", $cpf);
             $stmt_cpf->execute();
             $resultado_cpf = $stmt_cpf->get_result();
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             } else {
                 // Inserir novo usuário
                 $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
-                $stmt_inserir = $conexao->prepare("INSERT INTO usuarios (nivel_usuario, nome, email, senha, cpf) VALUES (?, ?, ?, ?, ?)");
+                $stmt_inserir = $conexao->prepare("INSERT INTO usuarios (nivel_usuarios, nome_usuarios, email_usuarios, senha_usuarios, cpf_usuarios) VALUES (?, ?, ?, ?, ?)");
                 $stmt_inserir->bind_param("issss", $nivel_usuario, $nome, $email, $senha_hash, $cpf);
                 
                 if ($stmt_inserir->execute()) {

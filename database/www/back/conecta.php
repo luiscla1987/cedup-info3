@@ -1,5 +1,5 @@
 <?php
-    $hostname = 'mysql'; 
+    $hostname = 'localhost'; 
     $username = 'root';
     $password = '1234';
     $banco = 'evento_db';

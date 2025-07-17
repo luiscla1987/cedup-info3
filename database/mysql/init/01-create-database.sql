@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
 
 -- Inserção segura do usuário root (sem erro se já existir)
 INSERT INTO usuarios (id_usuario, nivel_usuarios, nome_usuarios, email_usuarios, senha_usuarios, cpf_usuarios)
-VALUES (1, 2, 'root', 'root@gmail.com', '1234', '12345678901')
+VALUES (1, 1, 'admin', 'admin@gmail.com', 'admin', '12345678901')
 ON DUPLICATE KEY UPDATE
     nivel_usuarios = VALUES(nivel_usuarios),
     nome_usuarios = VALUES(nome_usuarios),

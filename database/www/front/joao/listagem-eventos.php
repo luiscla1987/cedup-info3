@@ -45,5 +45,7 @@ $resultado = $conecta->query($sql);
     <?php endif; ?>
 
     <?php $conecta->close(); ?>
+
+    teste
 </body>
 </html>

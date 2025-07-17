@@ -18,3 +18,7 @@ ENV PMA_PORT=3306
 EXPOSE 80
 
 # O comando padrão já está definido na imagem base
+# Dockerfile
+FROM php:7.0.33-apache
+
+RUN docker-php-ext-install mysqli

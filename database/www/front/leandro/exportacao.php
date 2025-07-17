@@ -14,6 +14,6 @@
     </form>
 
     <br>
-    <a href="exportar.php">Exportar Lista (CSV)</a>
+    <a href="exportacao.php">Exportar Lista (CSV)</a>
 </body>
 </html>

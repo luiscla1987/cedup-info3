@@ -8,6 +8,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     file_put_contents("presencas.csv", $linha, FILE_APPEND | LOCK_EX);
 
     echo "<p>Presença registrada com sucesso!</p>";
-    echo "<a href='index.php'>Voltar</a>";
+    echo "<a href='exportacao.php'>Voltar</a>";
 }
 ?>

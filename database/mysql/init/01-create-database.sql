@@ -22,6 +22,14 @@ CREATE TABLE IF NOT EXISTS usuarios (
     cpf_usuarios CHAR(11) NOT NULL UNIQUE
 );
 
+-- inserçaõ do root
+INSERT INTO `usuarios` (`id_usuario`, `nivel_usuarios`, `nome_usuarios`, `email_usuarios`, `senha_usuarios`, `cpf_usuarios`) VALUES
+(1, 2, 'root', 'root@gmail.com', '1234', '12345678901');
+
+CREATE TABLE ricardao (
+    id_ricardao INT AUTO_INCREMENT PRIMARY KEY,
+);
+
 -- Tabela inscritos
 CREATE TABLE IF NOT EXISTS inscritos (
     id_inscritos INT AUTO_INCREMENT PRIMARY KEY,
@@ -41,6 +49,7 @@ CREATE TABLE IF NOT EXISTS inscritos_eventos (
     FOREIGN KEY (id_evento) REFERENCES eventos(id_eventos) ON DELETE CASCADE,
     FOREIGN KEY (id_inscritos) REFERENCES inscritos(id_inscritos) ON DELETE CASCADE
 );
+
 
 CREATE TABLE IF NOT EXISTS listas (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -75,3 +84,7 @@ CREATE TABLE IF NOT EXISTS presencas (
 CREATE USER IF NOT EXISTS 'app_user'@'%' IDENTIFIED BY 'app_password';
 GRANT SELECT, INSERT, UPDATE, DELETE ON evento_db.* TO 'app_user'@'%';
 FLUSH PRIVILEGES;
+
+-- Inserção do root
+INSERT INTO usuarios (id_usuario, nivel_usuarios, nome_usuarios, email_usuarios, senha_usuarios, cpf_usuarios) 
+VALUES (1, 2, 'root', 'root@gmail.com', '1234', '12345678901');

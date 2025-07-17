@@ -1,3 +1,3 @@
 <?php
-    header('location: front/login.php');
+    header('location: /front/login.php');
 ?>

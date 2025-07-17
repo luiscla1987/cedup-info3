@@ -1,6 +1,6 @@
 <?php
     include("back/conecta.php");
-    include("front/thomaz/menu.php");
+    //include("front/thomaz/menu.php");
 ?>
 
 <!DOCTYPE html>

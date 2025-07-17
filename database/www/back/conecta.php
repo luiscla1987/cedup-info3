@@ -1,7 +1,7 @@
 <?php
     $hostname = 'mysql'; 
     $username = 'root';
-    $password = 'rootpassword';
+    $password = '1234';
     $banco = 'evento_db';
 
     $conecta = mysqli_connect($hostname, $username, $password, $banco);

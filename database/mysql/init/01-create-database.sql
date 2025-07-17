@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS eventos (
     valor DECIMAL(10,2) NOT NULL,
     local_eventos VARCHAR(255) NOT NULL
 );
-
+-- Get-Content 01-create-database.sql | docker exec -i mysql_db mysql -u root -prootpassword
 -- Tabela usuarios
 CREATE TABLE IF NOT EXISTS usuarios (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
@@ -22,9 +22,20 @@ CREATE TABLE IF NOT EXISTS usuarios (
     cpf_usuarios CHAR(11) NOT NULL UNIQUE
 );
 
--- inserçaõ do root
+
+-- Inserção segura do usuário root (sem erro se já existir)
+INSERT INTO usuarios (id_usuario, nivel_usuarios, nome_usuarios, email_usuarios, senha_usuarios, cpf_usuarios)
+VALUES (1, 2, 'root', 'root@gmail.com', '1234', '12345678901')
+ON DUPLICATE KEY UPDATE
+    nivel_usuarios = VALUES(nivel_usuarios),
+    nome_usuarios = VALUES(nome_usuarios),
+    email_usuarios = VALUES(email_usuarios),
+    senha_usuarios = VALUES(senha_usuarios),
+    cpf_usuarios = VALUES(cpf_usuarios);
+
+-- inserção do root
 INSERT INTO `usuarios` (`id_usuario`, `nivel_usuarios`, `nome_usuarios`, `email_usuarios`, `senha_usuarios`, `cpf_usuarios`) VALUES
-(1, 2, 'root', 'root@gmail.com', '1234', '12345678901');
+(1, 1, 'admin', 'admin@gmail.com', 'admin', '12345678901');
 
 CREATE TABLE ricardao (
     id_ricardao INT AUTO_INCREMENT PRIMARY KEY,
@@ -50,41 +61,34 @@ CREATE TABLE IF NOT EXISTS inscritos_eventos (
     FOREIGN KEY (id_inscritos) REFERENCES inscritos(id_inscritos) ON DELETE CASCADE
 );
 
-
+-- Tabela listas
 CREATE TABLE IF NOT EXISTS listas (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  nome VARCHAR(255) NOT NULL,
-  data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabela de participantes
+-- Tabela participantes
 CREATE TABLE IF NOT EXISTS participantes (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  nome VARCHAR(255) NOT NULL
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL
 );
 
--- Tabela de registros de presença
+-- Tabela presenças
 CREATE TABLE IF NOT EXISTS presencas (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  participante_id INT NOT NULL,
-  lista_id INT NOT NULL,
-  data_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
-  hora_entrada TIME DEFAULT NULL,
-  hora_saida TIME DEFAULT NULL,
-  status ENUM('presente', 'ausente', 'justificado') DEFAULT 'presente',
-  observacoes TEXT DEFAULT NULL,
-  FOREIGN KEY (participante_id) REFERENCES participantes(id),
-  FOREIGN KEY (lista_id) REFERENCES listas(id)
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    participante_id INT NOT NULL,
+    lista_id INT NOT NULL,
+    data_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    hora_entrada TIME DEFAULT NULL,
+    hora_saida TIME DEFAULT NULL,
+    status ENUM('presente', 'ausente', 'justificado') DEFAULT 'presente',
+    observacoes TEXT DEFAULT NULL,
+    FOREIGN KEY (participante_id) REFERENCES participantes(id),
+    FOREIGN KEY (lista_id) REFERENCES listas(id)
 );
 
--- Get-Content 01-create-database.sql | docker exec -i mysql_db mysql -u root -prootpassword
 
-
--- Criar usuário específico para a aplicação
 CREATE USER IF NOT EXISTS 'app_user'@'%' IDENTIFIED BY 'app_password';
 GRANT SELECT, INSERT, UPDATE, DELETE ON evento_db.* TO 'app_user'@'%';
 FLUSH PRIVILEGES;
-
--- Inserção do root
-INSERT INTO usuarios (id_usuario, nivel_usuarios, nome_usuarios, email_usuarios, senha_usuarios, cpf_usuarios) 
-VALUES (1, 2, 'root', 'root@gmail.com', '1234', '12345678901');

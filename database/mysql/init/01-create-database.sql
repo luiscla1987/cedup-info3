@@ -49,14 +49,19 @@ CREATE TABLE inscritos_eventos (
     id_evento INT NOT NULL,
     id_inscritos INT NOT NULL,
     status INT DEFAULT 1,
-    FOREIGN KEY (id_evento) REFERENCES eventos(id_evento) ON DELETE CASCADE,
+    FOREIGN KEY (id_evento) REFERENCES eventos(id_eventos) ON DELETE CASCADE,
     FOREIGN KEY (id_inscritos) REFERENCES inscritos(id_inscritos) ON DELETE CASCADE
 );
 
-
 -- Criar usuário específico para a aplicação
 CREATE USER IF NOT EXISTS 'app_user'@'%' IDENTIFIED BY 'app_password';
-GRANT SELECT, INSERT, UPDATE, DELETE ON exemplo_app.* TO 'app_user'@'%';
+GRANT SELECT, INSERT, UPDATE, DELETE ON evento_db.* TO 'app_user'@'%';
 FLUSH PRIVILEGES;
 
+<<<<<<< HEAD
 
+=======
+-- Inserção do root
+INSERT INTO usuarios (id_usuario, nivel_usuarios, nome_usuarios, email_usuarios, senha_usuarios, cpf_usuarios) 
+VALUES (1, 2, 'root', 'root@gmail.com', '1234', '12345678901');
+>>>>>>> 7832bdb15392867290e9e741591c2bd444249950

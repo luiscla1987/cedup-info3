@@ -13,9 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $erro = 'Por favor, preencha todos os campos.';
     } else {
         // Prepara a consulta para buscar o usuário pelo email
-        $stmt = $conexao->prepare("SELECT id_usuario, nome, nivel_usuario, senha FROM usuarios WHERE email = ?");
+        $stmt = $conecta->prepare("SELECT id_usuario, nome, nivel_usuario, senha FROM usuarios WHERE email = ?");
         if ($stmt === false) {
-            $erro = 'Erro ao preparar consulta: ' . $conexao->error;
+            $erro = 'Erro ao preparar consulta: ' . $conecta->error;
         } else {
             $stmt->bind_param("s", $email);
             $stmt->execute();

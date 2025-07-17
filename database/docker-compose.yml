@@ -7,7 +7,7 @@ services:
     container_name: mysql_db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: 1234
       MYSQL_DATABASE: evento_db
       MYSQL_USER: evento
       MYSQL_PASSWORD: evento123

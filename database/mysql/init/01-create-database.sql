@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     cpf_usuarios CHAR(11) NOT NULL UNIQUE
 );
 
--- inserçaõ do root
+-- inserção do root
 INSERT INTO `usuarios` (`id_usuario`, `nivel_usuarios`, `nome_usuarios`, `email_usuarios`, `senha_usuarios`, `cpf_usuarios`) VALUES
 (1, 1, 'admin', 'admin@gmail.com', 'admin', '12345678901');
 

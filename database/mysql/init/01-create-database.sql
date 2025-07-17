@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
 
 -- inserçaõ do root
 INSERT INTO `usuarios` (`id_usuario`, `nivel_usuarios`, `nome_usuarios`, `email_usuarios`, `senha_usuarios`, `cpf_usuarios`) VALUES
-(1, 2, 'root', 'root@gmail.com', '1234', '12345678901');
+(1, 1, 'admin', 'admin@gmail.com', 'admin', '12345678901');
 
 CREATE TABLE ricardao (
     id_ricardao INT AUTO_INCREMENT PRIMARY KEY,

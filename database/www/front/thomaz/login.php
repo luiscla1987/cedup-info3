@@ -5,10 +5,6 @@ require_once '../../back/conecta.php';
 $erro = '';
 $sucesso = '';
 
-$senha = "admin";
-$hash = password_hash($senha, PASSWORD_DEFAULT);
-echo $hash;
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = trim($_POST['email']);
     $senha = trim($_POST['senha']);
@@ -34,7 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $_SESSION['nome_usuario'] = $usuario['nome_usuarios'];
                     $_SESSION['nivel_usuario'] = $usuario['nivel_usuarios'];
                     $_SESSION['logado'] = true;
-
                     header('Location: ../index.php');
                     exit();
                 } else {

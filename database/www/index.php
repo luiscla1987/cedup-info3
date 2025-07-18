@@ -1,8 +1,8 @@
 <?php
     include("back/conecta.php");
 
-    if (file_exists(__DIR__ . "/thomaz/menu.php")) {
-        include(__DIR__ . "/thomaz/menu.php");
+    if (file_exists(__DIR__ . "/front/thomaz/menu.php")) {
+        include(__DIR__ . "/front/thomaz/menu.php");
     } else {
         echo "Arquivo menu.php não encontrado!";
     }

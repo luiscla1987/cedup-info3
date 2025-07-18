@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../back/conecta.php';
+require_once '../../back/conecta.php'; // Caminho corrigido
 
 $erro = '';
 $sucesso = '';
@@ -25,19 +25,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $usuario = $resultado->fetch_assoc();
                 
                 // Verifica se a senha fornecida corresponde à senha hash no banco de dados
-                if ($senha === $usuario['senha_usuarios']) {
+                if (password_verify($senha, $usuario['senha_usuarios'])) { // Corrigido para usar password_verify
                     $_SESSION['id_usuario'] = $usuario['id_usuario'];
                     $_SESSION['nome_usuario'] = $usuario['nome_usuarios'];
                     $_SESSION['nivel_usuario'] = $usuario['nivel_usuarios'];
                     $_SESSION['logado'] = true;
 
-                    header('Location: ../../index.php');
+                    header('Location: ../../index.php'); // Caminho corrigido
                     exit();
                 } else {
-                    $erro = 'Email ou senha incorretos. (Senha não corresponde)';
+                    $erro = 'Email ou senha incorretos.';
                 }
             } else {
-                $erro = 'Email ou senha incorretos. (Usuário não encontrado)';
+                $erro = 'Email ou senha incorretos.';
             }
             $stmt->close();
         }
@@ -58,11 +58,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h2>Login</h2>
         
         <?php if ($erro): ?>
-            <div><?php echo $erro; ?></div>
+            <div class="erro"><?php echo htmlspecialchars($erro); ?></div>
         <?php endif; ?>
         
         <?php if ($sucesso): ?>
-            <div><?php echo $sucesso; ?></div>
+            <div class="sucesso"><?php echo htmlspecialchars($sucesso); ?></div>
         <?php endif; ?>
         
         <form method="POST" action="">

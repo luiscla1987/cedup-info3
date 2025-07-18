@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../back/conecta.php';
+require_once '../../back/conecta.php'; // Correto - sobe 2 níveis
 
 $erro = '';
 $sucesso = '';
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $erro = 'A senha deve ter pelo menos 6 caracteres.';
     } else {
         // Verificar se email já existe
-        $stmt_email = $conexao->prepare("SELECT id_usuario FROM usuarios WHERE email_usuarios = ?");
+        $stmt_email = $conecta->prepare("SELECT id_usuario FROM usuarios WHERE email_usuarios = ?");
         $stmt_email->bind_param("s", $email);
         $stmt_email->execute();
         $resultado_email = $stmt_email->get_result();
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $erro = 'Este email já está cadastrado.';
         } else {
             // Verificar se CPF já existe
-            $stmt_cpf = $conexao->prepare("SELECT id_usuario FROM usuarios WHERE cpf_usuarios = ?");
+            $stmt_cpf = $conecta->prepare("SELECT id_usuario FROM usuarios WHERE cpf_usuarios = ?");
             $stmt_cpf->bind_param("s", $cpf);
             $stmt_cpf->execute();
             $resultado_cpf = $stmt_cpf->get_result();
@@ -37,19 +37,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             } else {
                 // Inserir novo usuário
                 $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
-                $stmt_inserir = $conexao->prepare("INSERT INTO usuarios (nivel_usuarios, nome_usuarios, email_usuarios, senha_usuarios, cpf_usuarios) VALUES (?, ?, ?, ?, ?)");
+                $stmt_inserir = $conecta->prepare("INSERT INTO usuarios (nivel_usuarios, nome_usuarios, email_usuarios, senha_usuarios, cpf_usuarios) VALUES (?, ?, ?, ?, ?)");
                 $stmt_inserir->bind_param("issss", $nivel_usuario, $nome, $email, $senha_hash, $cpf);
                 
                 if ($stmt_inserir->execute()) {
                     $sucesso = 'Usuário cadastrado com sucesso!';
                 } else {
-                    $erro = 'Erro ao cadastrar usuário: ' . $conexao->error;
+                    $erro = 'Erro ao cadastrar usuário: ' . $conecta->error;
                 }
                 $stmt_inserir->close();
             }
+            $stmt_cpf->close();
         }
         $stmt_email->close();
-        if (isset($stmt_cpf)) $stmt_cpf->close(); // Fecha se foi aberto
     }
 }
 ?>
@@ -67,11 +67,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h2 class="form-title">Cadastro de Usuário</h2>
         
         <?php if ($erro): ?>
-            <div><?php echo $erro; ?></div>
+            <div class="erro"><?php echo htmlspecialchars($erro); ?></div>
         <?php endif; ?>
         
         <?php if ($sucesso): ?>
-            <div><?php echo $sucesso; ?></div>
+            <div class="sucesso"><?php echo htmlspecialchars($sucesso); ?></div>
         <?php endif; ?>
         
         <form method="POST" action="">
@@ -106,6 +106,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             
             <button type="submit">Cadastrar</button>
         </form>
+        
+        <a href="menu.php">Voltar ao Menu</a>
     </div>
 
     <script>

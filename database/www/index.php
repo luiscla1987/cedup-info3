@@ -1,5 +1,5 @@
 <?php
-include("back/conecta.php"); // Caminho correto - mesmo nível
+    include("back/conecta.php");
 ?>
 
 <!DOCTYPE html>
@@ -10,11 +10,11 @@ include("back/conecta.php"); // Caminho correto - mesmo nível
     <title>Início</title>
 </head>
 <body>
+
     <?php
-        include("front/thomaz/menu.php"); // Caminho correto
+        include("/thomaz/menu.php");
     ?>
 
-    <h1>Sistema de Eventos</h1>
-    <p>Bem-vindo ao sistema de gerenciamento de eventos!</p>
+    <h1>TESTANDO........</h1>
 </body>
 </html>

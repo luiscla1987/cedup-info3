@@ -11,9 +11,7 @@
 </head>
 <body>
 
-    <?php
-        include("thomaz/menu.php");
-    ?>
+    
 
     <h1>TESTANDO........</h1>
 </body>

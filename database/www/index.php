@@ -1,12 +1,5 @@
 <?php
     include("back/conecta.php");
-
-    if (file_exists(__DIR__ . "/front/thomaz/menu.php")) {
-        include(__DIR__ . "/front/thomaz/menu.php");
-    } else {
-        echo "Arquivo menu.php não encontrado!";
-    }
-
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +10,10 @@
     <title>Início</title>
 </head>
 <body>
+
+    <?php
+        include("/thomaz/menu.php");
+    ?>
 
     <h1>TESTANDO........</h1>
 </body>

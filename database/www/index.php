@@ -1,7 +1,3 @@
-<?php
-    include("back/conecta.php");
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -10,9 +6,6 @@
     <title>Início</title>
 </head>
 <body>
-
-    
-
     <h1>TESTANDO........</h1>
 </body>
 </html>

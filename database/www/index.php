@@ -1,6 +1,5 @@
 <?php
     include("back/conecta.php");
-    //include("front/thomaz/menu.php");
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +10,11 @@
     <title>Início</title>
 </head>
 <body>
+
+    <?php
+        include("thomaz/menu.php");
+    ?>
+    
     <h1>TESTANDO........</h1>
 </body>
 </html>
